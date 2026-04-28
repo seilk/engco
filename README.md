@@ -43,13 +43,9 @@ Korean (or any other language) in → translation mode:
 
 ## Why this design
 
-A coach that interrupts your work fails the second time you use it. engco is built around three constraints:
+A coach that interrupts your work fails the second time you use it. engco has to be invisible until you want it.
 
-1. **No wait.** The hook is fire-and-forget. The user never sits staring at a spinner.
-2. **Match the prompt that was just typed.** No "previous prompt" lag.
-3. **Live in the chat flow.** Show the diff inline, at the end, where the eye lands after reading the answer.
-
-Getting all three at once needs a small trick. The hook spawns a background worker (~1.2s API call) and tells the assistant: "after answering the user, run this Bash command to fetch the result and paste it." Streaming the answer takes long enough that by the time the assistant calls Bash, the worker is already done. The retrieval is instant. The coach footer appears at the end of the same response.
+That means no spinner before Claude starts replying, no critique that lags one prompt behind what you just typed, and no separate panel or notification to check. The hook fires off a background worker (~1.2s API call) and tells the assistant: after answering the user, run this Bash command to fetch the result and paste it. Streaming the answer takes long enough that the worker is already done by the time the assistant calls Bash. The retrieval is instant. The coach footer appears at the end of the same response, matching the prompt that was just typed.
 
 ## Install
 
@@ -94,7 +90,7 @@ for i in $(seq 1 50); do [ -f ~/.claude/state/engco-pending.flag ] && break; sle
   rm -f ~/.claude/state/engco-pending.flag
 ```
 
-If the response finishes before the worker (rare), the loop polls for up to 5s. If the worker fails entirely (network error, no credentials), the footer is silently dropped — never breaks the user's main flow.
+If the response finishes before the worker (rare), the loop polls for up to 5s. If the worker fails entirely (network error, no credentials), the footer is silently dropped. The user's main flow never breaks.
 
 ## Configuration
 
@@ -115,7 +111,7 @@ The hook silently skips on:
 - Empty prompt
 - Prompt starting with `/` (slash commands)
 - Prompt containing `[noeng]` (manual opt-out marker)
-- Prompt containing triple backticks (code-heavy input — critiquing the framing adds noise)
+- Prompt containing triple backticks (code-heavy input; critiquing the framing adds noise)
 - Prompt below both `MIN_WORDS=6` words AND `MIN_CHARS=20` characters
 - Toggle off via `/engco-off` (creates `~/.claude/state/engco.off`)
 
@@ -132,8 +128,8 @@ The hook silently skips on:
 
 The system prompt that drives the coach lives at the top of `hooks/engco_worker.py`. Two modes:
 
-- **Mode A (English)** — produces `📝 English coach` block with `Changes:` bullet list.
-- **Mode B (non-English)** — produces `🌐 English coach (translation: <src> → en)` block with `Key renderings:` bullet list.
+- **Mode A (English)**: produces `📝 English coach` block with `Changes:` bullet list.
+- **Mode B (non-English)**: produces `🌐 English coach (translation: <src> → en)` block with `Key renderings:` bullet list.
 
 Linguistic labels used in change bullets: `article`, `collocation`, `register`, `run-on`, `redundancy`, `agreement`, `word order`, `tense`, `contraction`, `capitalization`, `typo`, `preposition`, `conjunction`, `plural`. Edit the prompt to add labels relevant to your target language pair.
 
@@ -143,7 +139,7 @@ To change which prompts trigger, edit `should_critique()` in `hooks/engco_sugges
 
 ## Acknowledgments
 
-The defer-bash pattern (fire-and-forget hook + assistant-pulled retrieval) was the result of a long back-and-forth between the user and the original session that built engco. It works because Claude Code hooks run synchronously before the model speaks, but Bash tool calls happen during the model's response. The two phases let async work hide behind streaming.
+The defer-bash pattern (fire-and-forget hook plus assistant-pulled retrieval) came out of an iterative session. It works because Claude Code hooks run synchronously before the model speaks, but Bash tool calls happen during the model's response. The two phases let async work hide behind streaming.
 
 ## License
 
