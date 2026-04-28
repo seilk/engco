@@ -1,3 +1,7 @@
+---
+description: Run the English coach manually on text or the previous prompt. Critiques English; translates non-English to natural English.
+---
+
 # /engco — English coach (alias for /english-check)
 
 Invoke the `english-check` skill via the Skill tool.

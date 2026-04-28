@@ -1,3 +1,7 @@
+---
+description: Display the latest engco critique from ~/.claude/state/engco-last.md.
+---
+
 # /engco-show — Show the latest async English-coach critique
 
 Read `~/.claude/state/engco-last.md` and display its contents in chat as a single short message.

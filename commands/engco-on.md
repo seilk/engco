@@ -1,3 +1,7 @@
+---
+description: Re-enable the engco auto English coach. Removes the ~/.claude/state/engco.off marker file.
+---
+
 # /engco-on — Re-enable the auto English coach
 
 Run this Bash command exactly once, then report the result in one short line:

@@ -1,3 +1,7 @@
+---
+description: Disable the engco auto English coach. Creates a ~/.claude/state/engco.off marker; manual /engco still works.
+---
+
 # /engco-off — Disable the auto English coach
 
 Run this Bash command exactly once, then report the result in one short line:
