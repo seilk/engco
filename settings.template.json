@@ -1,0 +1,27 @@
+{
+  "_comment": "Merge these hook blocks into your ~/.claude/settings.json under .hooks. The standalone install.sh does this automatically with jq. For plugin install, this template is unused — the plugin's hooks/hooks.json registers them.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/<you>/.claude/hooks/engco_suggest.py"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/<you>/.claude/hooks/engco_status.py"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "engco",
+  "description": "Async English coach for Claude Code. Critiques English prompts inline with a diff UI; translates non-English prompts (Korean, Japanese, etc.) to natural English. Zero perceived latency via fire-and-forget worker + defer-bash retrieval.",
+  "version": "0.1.0",
+  "author": {
+    "name": "seil"
+  },
+  "license": "MIT",
+  "keywords": [
+    "english-coach",
+    "language-learning",
+    "translation",
+    "korean",
+    "diff-ui",
+    "async"
+  ],
+  "repository": "https://github.com/seilk/engco",
+  "homepage": "https://github.com/seilk/engco"
+}

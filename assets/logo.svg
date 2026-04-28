@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="engco logo">
+  <title>engco</title>
+
+  <!-- minus line (original, slate) -->
+  <rect x="40" y="92" width="40" height="10" rx="5" fill="#475569"/>
+  <rect x="88" y="92" width="128" height="10" rx="5" fill="#94a3b8"/>
+
+  <!-- transition arrow -->
+  <path d="M128 116 L128 140 M118 132 L128 142 L138 132"
+        stroke="#10b981" stroke-width="6"
+        stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- plus line (corrected, green) -->
+  <rect x="40" y="154" width="40" height="10" rx="5" fill="#10b981"/>
+  <rect x="88" y="154" width="148" height="10" rx="5" fill="#10b981" opacity="0.55"/>
+</svg>
